@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ScheduleApp</string>
+    <string name="input_name">Имя преподавателя</string>
+    <string name="name">Преподаватель:</string>
+    <string name="input_building">Номер корпуса</string>
+    <string name="building">Корпус:</string>
+    <string name="discipline">Предмет:</string>
+    <string name="input_discipline">Название предмета</string>
+    <string name="duration">Длительность:</string>
+    <string name="input_duration">Количество часов</string>
+    <string name="position">Должность:</string>
+    <string name="input_position">Должность преподавателя</string>
+    <string name="classroom">Аудитория:</string>
+    <string name="input_classroom">Введите аудиторию</string>
+    <string name="time">Время:</string>
+    <string name="input_time">Введите время (hh:mm)</string>
+    <string name="cancel">Отмена</string>
+    <string name="save">Сохранить</string>
+    <string name="aaaaaaaaaa">aaaaaaaaaa</string>
+    <string name="dayOfMonth">День:</string>
+    <string name="dayTime">Время:</string>
+    <string name="madd">+</string>
+    <string name="mDell">Удалить</string>
+    <string name="mChange">Изменить</string>
+</resources>
