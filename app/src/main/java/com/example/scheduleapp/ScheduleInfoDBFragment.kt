@@ -89,7 +89,7 @@ class ScheduleInfoDBFragment : Fragment() {
         schedule?.building = etBuilding.text.toString().toInt()
         schedule?.position = etPosition.text.toString()
         schedule?.date = date.time
-        schedule?.date = Date(dpDate.year, dpDate.month, dpDate.dayOfMonth, etTime.text.toString().split(":")[0].toInt(), etTime.text.toString().split(":")[1].toInt())
+        schedule?.date = Date(dpDate.year - 1900, dpDate.month, dpDate.dayOfMonth, etTime.text.toString().split(":")[0].toInt(), etTime.text.toString().split(":")[1].toInt())
         schedule?.duration = etDuration.text.toString().toInt()
         schedule?.classroom = etClassroom.text.toString()
     }
