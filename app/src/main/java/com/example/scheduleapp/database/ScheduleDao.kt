@@ -3,11 +3,25 @@ package com.example.scheduleapp.database
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
+import com.example.scheduleapp.data.Group
 import com.example.scheduleapp.data.Schedule
 import java.util.*
 
 @Dao
 interface ScheduleDao {
+    @Query("SELECT * FROM group")
+    fun getGroups(): LiveData<List<Group>>
+    @Query("SELECT * FROM group WHERE id=(:id)")
+    fun getGroup(id: UUID): LiveData<Group?>
+    @Update
+    fun updateGroup(group: Group)
+    @Insert
+    fun addGroup(group: Group)
+    @Delete
+    fun deleteGroup(group: Group)
+
+
+
     @Query("SELECT * FROM schedule")
     fun getSchedules(): LiveData<List<Schedule>>
 

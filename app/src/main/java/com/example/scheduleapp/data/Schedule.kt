@@ -7,6 +7,7 @@ import java.util.*
 @Entity
 data class Schedule(
     @PrimaryKey val id : UUID = UUID.randomUUID(),
+    var groupID: UUID = UUID.randomUUID(),
     var date: Date = Date(),
     var discipline : String = "",
     var teacherName : String = "",

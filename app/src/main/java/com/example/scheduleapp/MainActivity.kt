@@ -9,23 +9,25 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
+import com.example.scheduleapp.MyConstants.GROUP_LIST_FRAGMENT_TAG
 import com.example.scheduleapp.MyConstants.SCHEDULE_INFO_FRAGMENT_TAG
 import com.example.scheduleapp.MyConstants.SCHEDULE_LIST_FRAGMENT_TAG
+import com.example.scheduleapp.data.Group
 import com.example.scheduleapp.data.Schedule
 import com.example.scheduleapp.repository.ScheduleDBRepository
 import com.example.scheduleapp.repository.ScheduleRepository
 import java.util.*
 
-class MainActivity : AppCompatActivity(), ScheduleListDBFragment.Callbacks, ScheduleInfoDBFragment.Callbacks {
+class MainActivity : AppCompatActivity(), GroupListDBFragment.Callbacks, GroupInfoDBFragment.Callbacks {
 
-    private var miAdd : MenuItem? = null
-    private var miDelete : MenuItem? = null
-    private var miChange : MenuItem? = null
+    private var miGrAdd : MenuItem? = null
+    private var miGrDelete : MenuItem? = null
+    private var miGrChange : MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        showDBSchedules()
+        showDBGroups()
 
         val callback = object : OnBackPressedCallback(true)
         {
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity(), ScheduleListDBFragment.Callbacks, Sche
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        saveData()
+        //saveData()
         super.onSaveInstanceState(outState)
     }
 
@@ -46,20 +48,20 @@ class MainActivity : AppCompatActivity(), ScheduleListDBFragment.Callbacks, Sche
         savedInstanceState: Bundle?,
         persistentState: PersistableBundle?
     ) {
-        loadData()
+        //loadData()
         super.onRestoreInstanceState(savedInstanceState, persistentState)
     }
 
-    private fun loadData() {
-        ScheduleRepository.getInstance().loadSchedules()
+    /*private fun loadData() {
+        GroupRepository.getInstance().loadGroups()
     }
 
     private fun saveData() {
-        ScheduleRepository.getInstance().saveSchedules()
-    }
+        GroupRepository.getInstance().saveGroups()
+    }*/
 
     override fun onStop() {
-        saveData()
+        //saveData()
         super.onStop()
     }
 
@@ -77,107 +79,71 @@ class MainActivity : AppCompatActivity(), ScheduleListDBFragment.Callbacks, Sche
             .show()
     }
 
-    fun checkDelete() {
-        val s = ScheduleRepository.getInstance().schedule.value?.discipline
+    /*fun checkDelete() {
+        val s = GroupRepository.getInstance().group.value?.name
         AlertDialog.Builder(this)
             .setTitle("УДАЛЕНИЕ!")
-            .setMessage("Вы действительно хотите удалить расписание $s ?")
+            .setMessage("Вы действительно хотите удалить группу $s ?")
             .setPositiveButton("ДА") { _, _ ->
-                ScheduleRepository.getInstance().deleteScheduleCurrent()
+                GroupRepository.getInstance().deleteGroupCurrent()
             }
             .setNegativeButton("НЕТ", null)
             .setCancelable(true)
             .create()
             .show()
-    }
+    }*/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.main_menu, menu)
-        miAdd=menu.findItem(R.id.miAdd)
-        miDelete=menu.findItem(R.id.miDelete)
-        miChange=menu.findItem(R.id.miChange)
+        inflater.inflate(R.menu.group_menu, menu)
+        miGrAdd=menu.findItem(R.id.miGrAdd)
+        miGrDelete=menu.findItem(R.id.miGrDelete)
+        miGrChange=menu.findItem(R.id.miGrChange)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.miAdd -> {
-                //showNewStudent()
-                showScheduleDetailDB(Schedule().id)
+            R.id.miGrAdd -> {
+                //showNewGroup()
+                showGroupDetailDB(Group().id)
                 true
             }
-            R.id.miDelete -> {
-                checkDelete()
+            R.id.miGrDelete -> {
+                //checkDelete()
                 true
             }
-            R.id.miChange -> {
-                //showScheduleInfo()
+            R.id.miGrChange -> {
+                //showGroupInfo()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    /*fun showNewSchedule() {
-        ScheduleRepository.getInstance().newSchedule()
-        showScheduleInfo()
+    override fun onGroupSelected(groupId: UUID) {
+        showGroupDetailDB(groupId)
     }
 
-    fun showSchedulesList() {
-        miAdd?.isVisible=true
-        miDelete?.isVisible=true
-        miChange?.isVisible=true
+    private fun showGroupDetailDB(groupId: UUID) {
+        miGrAdd?.isVisible=false
+        miGrDelete?.isVisible=false
+        miGrChange?.isVisible=false
+        val fragment = GroupInfoDBFragment.newInstance(groupId)
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.frame, SchedulesListFragment.getInstance(), SCHEDULE_LIST_FRAGMENT_TAG)
+            .replace(R.id.frameMain, fragment)
             .commit()
     }
 
-    fun showScheduleInfo() {
-        miAdd?.isVisible=false
-        miDelete?.isVisible=false
-        miChange?.isVisible=false
+    override fun showDBGroups() {
+        miGrAdd?.isVisible=true
+        miGrDelete?.isVisible=true
+        miGrChange?.isVisible=true
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.frame, ScheduleInfoFragment.getInstance(), SCHEDULE_INFO_FRAGMENT_TAG)
-            //.addToBackStack(null)
+            .replace(R.id.frameMain, GroupListDBFragment.getInstance(), GROUP_LIST_FRAGMENT_TAG)
             .commit()
-    }*/
-
-    override fun onScheduleSelected(scheduleId: UUID) {
-        showScheduleDetailDB(scheduleId)
-    }
-
-    override fun onScheduleLongClick(scheduleBuilding: String) {
-        showToast(scheduleBuilding)
-    }
-
-    private fun showScheduleDetailDB(scheduleId: UUID) {
-        miAdd?.isVisible=false
-        miDelete?.isVisible=false
-        miChange?.isVisible=false
-        val fragment = ScheduleInfoDBFragment.newInstance(scheduleId)
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.frame, fragment)
-            .commit()
-    }
-
-    override fun showDBSchedules() {
-        miAdd?.isVisible=true
-        miDelete?.isVisible=true
-        miChange?.isVisible=true
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.frame, ScheduleListDBFragment.getInstance(), SCHEDULE_LIST_FRAGMENT_TAG)
-            .commit()
-    }
-
-    private fun showToast(scheduleBuilding: String) {
-        val text = "Номер корпуса: $scheduleBuilding"
-        val toast = Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT)
-        toast.show()
     }
 
 }

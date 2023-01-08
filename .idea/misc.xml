@@ -4,12 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/activity_main.xml" value="0.22735507246376813" />
+        <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/activity_schedule.xml" value="0.25416666666666665" />
+        <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/fragment_schedule_list.xml" value="0.25416666666666665" />
         <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/fragment_students_list.xml" value="0.22735507246376813" />
+        <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/group_info.xml" value="0.253125" />
+        <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/groups_list_element.xml" value="0.253125" />
+        <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/list_of_groups.xml" value="0.253125" />
         <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/list_of_schedules.xml" value="0.22735507246376813" />
         <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/schedule_info.xml" value="0.22735507246376813" />
         <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/schedules_list_element.xml" value="0.22735507246376813" />
         <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/student_info.xml" value="0.22735507246376813" />
         <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/layout/students_list_element.xml" value="0.22735507246376813" />
+        <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/menu/group_menu.xml" value="0.253125" />
         <entry key="..\:/Programming/Android/ScheduleApp/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
       </map>
     </option>

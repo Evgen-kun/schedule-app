@@ -19,6 +19,8 @@
     <string name="aaaaaaaaaa">aaaaaaaaaa</string>
     <string name="dayOfMonth">День:</string>
     <string name="dayTime">Время:</string>
+    <string name="grName">Группа:</string>
+    <string name="input_grName">Название группы</string>
     <string name="madd">+</string>
     <string name="mDell">Удалить</string>
     <string name="mChange">Изменить</string>

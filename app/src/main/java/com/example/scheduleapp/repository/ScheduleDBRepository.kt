@@ -3,6 +3,7 @@ package com.example.scheduleapp.repository
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
+import com.example.scheduleapp.data.Group
 import com.example.scheduleapp.data.Schedule
 import com.example.scheduleapp.database.ScheduleDatabase
 import java.util.*
@@ -32,6 +33,9 @@ class ScheduleDBRepository private constructor(context: Context) {
 
     private val scheduleDao = database.scheduleDao()
 
+    fun getGroups(): LiveData<List<Group>> = scheduleDao.getGroups()
+    fun getGroup(id: UUID): LiveData<Group?> = scheduleDao.getGroup(id)
+
     fun getSchedules(): LiveData<List<Schedule>> = scheduleDao.getSchedules()
     fun getSortedSchedulesByDiscipline(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByDiscipline()
     fun getSortedSchedulesByTeacherName(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByTeacherName()
@@ -46,6 +50,22 @@ class ScheduleDBRepository private constructor(context: Context) {
     fun getScheduleElements(id: UUID): LiveData<Date> = scheduleDao.getScheduleElements(id)
 
     private val executor = Executors.newSingleThreadExecutor()
+    fun updateGroup(group: Group) {
+        executor.execute {
+            scheduleDao.updateGroup(group)
+        }
+    }
+    fun addGroup(group: Group) {
+        executor.execute {
+            scheduleDao.addGroup(group)
+        }
+    }
+    fun deleteGroup(group: Group) {
+        executor.execute {
+            scheduleDao.deleteGroup(group)
+        }
+    }
+
     fun updateSchedule(schedule: Schedule) {
         executor.execute {
             scheduleDao.updateSchedule(schedule)
