@@ -2,12 +2,14 @@ package com.example.scheduleapp
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.scheduleapp.MyConstants.SCHEDULE_ID_TAG
@@ -17,6 +19,16 @@ import java.util.*
 class ScheduleInfoDBFragment : Fragment() {
     private var schedule : Schedule? = null
     private lateinit var scheduleInfoViewModel : ScheduleInfoDBViewModel
+    private lateinit var scheduleListFragment : ScheduleListDBFragment
+
+    private lateinit var tvDiscipline : TextView
+    private lateinit var tvTeacherName : TextView
+    private lateinit var tvBuilding : TextView
+    private lateinit var tvPosition : TextView
+    private lateinit var tvTime : TextView
+    private lateinit var tvDuration : TextView
+    private lateinit var tvClassroom : TextView
+
     private lateinit var etDiscipline : EditText
     private lateinit var etTeacherName : EditText
     private lateinit var etBuilding : EditText
@@ -54,6 +66,53 @@ class ScheduleInfoDBFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.schedule_info, container, false)
+        //scheduleListFragment = ScheduleListDBFragment.getInstance()
+        tvDiscipline = view.findViewById(R.id.l_discipline)
+        tvDiscipline.setOnLongClickListener {
+
+            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByDiscipline().value!!)
+            //callbacks?.showDBSchedules()
+            true
+        }
+        tvTeacherName = view.findViewById(R.id.l_teacherName)
+        tvTeacherName.setOnLongClickListener {
+            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByTeacherName().value!!)
+            //callbacks?.showDBSchedules()
+            true
+        }
+        tvPosition = view.findViewById(R.id.l_position)
+        tvPosition.setOnLongClickListener {
+            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByPosition().value!!)
+            //callbacks?.showDBSchedules()
+            true
+        }
+        tvBuilding = view.findViewById(R.id.l_building)
+        tvBuilding.setOnLongClickListener {
+            //Log.d(MyConstants.TAG, scheduleInfoViewModel.sortSchedulesByBuilding().value.toString())
+            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByBuilding().value!!)
+            //callbacks?.showDBSchedules()
+            true
+        }
+        tvTime = view.findViewById(R.id.l_time)
+        tvTime.setOnLongClickListener {
+            //Log.d(MyConstants.TAG, scheduleInfoViewModel.sortSchedulesByDate().value.toString())
+            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByDate().value!!)
+            //callbacks?.showDBSchedules()
+            true
+        }
+        tvDuration = view.findViewById(R.id.l_duration)
+        tvDuration.setOnLongClickListener {
+            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByDuration().value!!)
+            //callbacks?.showDBSchedules()
+            true
+        }
+        tvClassroom = view.findViewById(R.id.l_classroom)
+        tvClassroom.setOnLongClickListener {
+            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByClassroom().value!!)
+            //callbacks?.showDBSchedules()
+            true
+        }
+
         etDiscipline=view.findViewById(R.id.discipline)
         etTeacherName=view.findViewById(R.id.teacherName)
         etBuilding=view.findViewById(R.id.building)

@@ -33,6 +33,15 @@ class ScheduleDBRepository private constructor(context: Context) {
     private val scheduleDao = database.scheduleDao()
 
     fun getSchedules(): LiveData<List<Schedule>> = scheduleDao.getSchedules()
+    fun getSortedSchedulesByDiscipline(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByDiscipline()
+    fun getSortedSchedulesByTeacherName(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByTeacherName()
+    fun getSortedSchedulesByPosition(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByPosition()
+    fun getSortedSchedulesByBuilding(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByBuilding()
+    fun getSortedSchedulesByDate(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByDate()
+    fun getSortedSchedulesByDuration(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByDuration()
+    fun getSortedSchedulesByClassroom(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByClassroom()
+    //fun getSortedSchedules(column: String): LiveData<List<Schedule>> = scheduleDao.getSortedSchedules(column)
+
     fun getSchedule(id: UUID): LiveData<Schedule?> = scheduleDao.getSchedule(id)
     fun getScheduleElements(id: UUID): LiveData<Date> = scheduleDao.getScheduleElements(id)
 

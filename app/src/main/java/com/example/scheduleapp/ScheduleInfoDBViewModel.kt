@@ -1,9 +1,7 @@
 package com.example.scheduleapp
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import android.util.Log
+import androidx.lifecycle.*
 import com.example.scheduleapp.data.Schedule
 import com.example.scheduleapp.repository.ScheduleDBRepository
 import java.util.*
@@ -31,4 +29,28 @@ class ScheduleInfoDBViewModel: ViewModel() {
     fun dropSchedule(schedule: Schedule) {
         scheduleRepository.deleteSchedule(schedule)
     }
+
+
+    fun sortSchedulesByDiscipline(): LiveData<List<Schedule>> {
+        return scheduleRepository.getSortedSchedulesByDiscipline()
+    }
+    fun sortSchedulesByPosition(): LiveData<List<Schedule>> {
+        return scheduleRepository.getSortedSchedulesByPosition()
+    }
+    fun sortSchedulesByTeacherName(): LiveData<List<Schedule>> {
+        return scheduleRepository.getSortedSchedulesByTeacherName()
+    }
+    fun sortSchedulesByDate(): LiveData<List<Schedule>> {
+        return scheduleRepository.getSortedSchedulesByDate()
+    }
+    fun sortSchedulesByBuilding(): LiveData<List<Schedule>> {
+        return scheduleRepository.getSortedSchedulesByBuilding()
+    }
+    fun sortSchedulesByClassroom(): LiveData<List<Schedule>> {
+        return scheduleRepository.getSortedSchedulesByClassroom()
+    }
+    fun sortSchedulesByDuration(): LiveData<List<Schedule>> {
+        return scheduleRepository.getSortedSchedulesByDuration()
+    }
+
 }
