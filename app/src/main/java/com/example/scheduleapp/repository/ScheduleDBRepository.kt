@@ -34,6 +34,7 @@ class ScheduleDBRepository private constructor(context: Context) {
 
     fun getSchedules(): LiveData<List<Schedule>> = scheduleDao.getSchedules()
     fun getSchedule(id: UUID): LiveData<Schedule?> = scheduleDao.getSchedule(id)
+    fun getScheduleElements(id: UUID): LiveData<Date> = scheduleDao.getScheduleElements(id)
 
     private val executor = Executors.newSingleThreadExecutor()
     fun updateSchedule(schedule: Schedule) {
@@ -46,6 +47,10 @@ class ScheduleDBRepository private constructor(context: Context) {
             scheduleDao.addSchedule(schedule)
         }
     }
-
+    fun deleteSchedule(schedule: Schedule) {
+        executor.execute {
+            scheduleDao.deleteSchedule(schedule)
+        }
+    }
 
 }

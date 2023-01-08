@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -75,7 +76,7 @@ class ScheduleListDBFragment : Fragment() {
     private inner class ScheduleHolder(view : View)
         : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener{
         private lateinit var schedule: Schedule
-        private val fioTextView : TextView = itemView.findViewById(R.id.tvFIO)
+        //private val fioTextView : TextView = itemView.findViewById(R.id.tvFIO)
         private val dayTextView : TextView = itemView.findViewById(R.id.tvDayOfMonth)
         private val timeTextView : TextView = itemView.findViewById(R.id.tvTime)
         private val clLayout: ConstraintLayout = itemView.findViewById(R.id.clCL)
@@ -83,7 +84,7 @@ class ScheduleListDBFragment : Fragment() {
         fun bind(schedule: Schedule){
             //Log.d(MyConstants.TAG, "bind 1 $schedule")
             this.schedule = schedule
-            fioTextView.text = schedule.discipline
+            //fioTextView.text = schedule.discipline
             dayTextView.text = schedule.day
             timeTextView.text = schedule.time
             //Log.d(MyConstants.TAG, "bind 2 $schedule")
@@ -99,7 +100,7 @@ class ScheduleListDBFragment : Fragment() {
         }
 
         override fun onLongClick(v: View?): Boolean {
-
+            callbacks?.onScheduleLongClick(schedule.building.toString())
             return true
         }
 
@@ -113,6 +114,7 @@ class ScheduleListDBFragment : Fragment() {
 
     interface Callbacks {
         fun onScheduleSelected(scheduleId: UUID)
+        fun onScheduleLongClick(scheduleBuilding: String)
     }
 
     private var callbacks: Callbacks? = null

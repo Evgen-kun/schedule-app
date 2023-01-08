@@ -6,6 +6,7 @@ import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import com.example.scheduleapp.MyConstants.SCHEDULE_INFO_FRAGMENT_TAG
@@ -148,7 +149,14 @@ class MainActivity : AppCompatActivity(), ScheduleListDBFragment.Callbacks, Sche
         showScheduleDetailDB(scheduleId)
     }
 
+    override fun onScheduleLongClick(scheduleBuilding: String) {
+        showToast(scheduleBuilding)
+    }
+
     private fun showScheduleDetailDB(scheduleId: UUID) {
+        miAdd?.isVisible=false
+        miDelete?.isVisible=false
+        miChange?.isVisible=false
         val fragment = ScheduleInfoDBFragment.newInstance(scheduleId)
         supportFragmentManager
             .beginTransaction()
@@ -157,10 +165,19 @@ class MainActivity : AppCompatActivity(), ScheduleListDBFragment.Callbacks, Sche
     }
 
     override fun showDBSchedules() {
+        miAdd?.isVisible=true
+        miDelete?.isVisible=true
+        miChange?.isVisible=true
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.frame, ScheduleListDBFragment.getInstance(), SCHEDULE_LIST_FRAGMENT_TAG)
             .commit()
+    }
+
+    private fun showToast(scheduleBuilding: String) {
+        val text = "Номер корпуса: $scheduleBuilding"
+        val toast = Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT)
+        toast.show()
     }
 
 }

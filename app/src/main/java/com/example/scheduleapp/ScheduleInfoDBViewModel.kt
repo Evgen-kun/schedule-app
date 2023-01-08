@@ -27,4 +27,8 @@ class ScheduleInfoDBViewModel: ViewModel() {
     fun saveSchedule(schedule: Schedule) {
         scheduleRepository.updateSchedule(schedule)
     }
+
+    fun dropSchedule(schedule: Schedule) {
+        scheduleRepository.deleteSchedule(schedule)
+    }
 }

@@ -1,10 +1,7 @@
 package com.example.scheduleapp.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.scheduleapp.data.Schedule
 import java.util.*
 
@@ -14,8 +11,12 @@ interface ScheduleDao {
     fun getSchedules(): LiveData<List<Schedule>>
     @Query("SELECT * FROM schedule WHERE id=(:id)")
     fun getSchedule(id: UUID): LiveData<Schedule?>
+    @Query("SELECT date FROM schedule WHERE id=(:id)")
+    fun getScheduleElements(id: UUID): LiveData<Date>
     @Update
-    fun updateSchedule(student: Schedule)
+    fun updateSchedule(schedule: Schedule)
     @Insert
-    fun addSchedule(student: Schedule)
+    fun addSchedule(schedule: Schedule)
+    @Delete
+    fun deleteSchedule(schedule: Schedule)
 }

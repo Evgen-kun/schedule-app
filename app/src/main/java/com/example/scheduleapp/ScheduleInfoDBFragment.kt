@@ -26,6 +26,7 @@ class ScheduleInfoDBFragment : Fragment() {
     private lateinit var etDuration : EditText
     private lateinit var etClassroom : EditText
     private lateinit var btnSave : Button
+    private lateinit var btnDelete : Button
     private lateinit var btnCancel : Button
 
     companion object {
@@ -72,6 +73,13 @@ class ScheduleInfoDBFragment : Fragment() {
                 scheduleInfoViewModel.saveSchedule(schedule!!)
             }
             //TODO("выход")
+            callbacks?.showDBSchedules()
+        }
+        btnDelete=view.findViewById(R.id.btnDelete)
+        btnDelete.setOnClickListener {
+            if (schedule != null) {
+                scheduleInfoViewModel.dropSchedule(schedule!!)
+            }
             callbacks?.showDBSchedules()
         }
         btnCancel=view.findViewById(R.id.btnCancel)
