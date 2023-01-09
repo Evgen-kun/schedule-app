@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity
-data class Group (
+data class GroupSC (
     @PrimaryKey val id : UUID = UUID.randomUUID(),
     var name : String = "",
 )
@@ -14,7 +14,7 @@ data class Group (
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Group
+        other as GroupSC
 
         if (id != other.id) return false
         if (name != other.name) return false

@@ -11,8 +11,11 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.scheduleapp.MyConstants.GROUP_ID_TAG
 import com.example.scheduleapp.MyConstants.SCHEDULE_ID_TAG
+import com.example.scheduleapp.data.GroupSC
 import com.example.scheduleapp.data.Schedule
+import com.example.scheduleapp.repository.ScheduleDBRepository
 import java.util.*
 
 class ScheduleInfoDBFragment : Fragment() {
@@ -53,7 +56,6 @@ class ScheduleInfoDBFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val scheduleId: UUID = UUID.fromString(arguments?.getString(SCHEDULE_ID_TAG))
         scheduleInfoViewModel = ViewModelProvider(this).get(ScheduleInfoDBViewModel::class.java)
         scheduleInfoViewModel.loadSchedule(scheduleId)
@@ -123,7 +125,7 @@ class ScheduleInfoDBFragment : Fragment() {
         btnSave=view.findViewById(R.id.btOk)
         btnSave.setOnClickListener {
             if (schedule == null) {
-                schedule = Schedule()
+                schedule = Schedule(groupID = ScheduleDBRepository.get().groupID)
                 updateSchedule()
                 scheduleInfoViewModel.newSchedule(schedule!!)
             } else {

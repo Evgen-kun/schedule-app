@@ -9,9 +9,12 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.example.scheduleapp.MyConstants.EXTRA_GROUP_ID
 import com.example.scheduleapp.data.Schedule
 import com.example.scheduleapp.repository.ScheduleRepository
 import java.util.*
+
 
 class ScheduleActivity : AppCompatActivity(), ScheduleListDBFragment.Callbacks, ScheduleInfoDBFragment.Callbacks {
 
@@ -21,13 +24,14 @@ class ScheduleActivity : AppCompatActivity(), ScheduleListDBFragment.Callbacks, 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_schedule)
+        //val myIntent = intent
         showDBSchedules()
 
         val callback = object : OnBackPressedCallback(true)
         {
             override fun handleOnBackPressed() {
-                checkLogout()
+                logout()
             }
         }
 
@@ -60,18 +64,8 @@ class ScheduleActivity : AppCompatActivity(), ScheduleListDBFragment.Callbacks, 
         super.onStop()
     }
 
-    private fun checkLogout() {
-        AlertDialog.Builder(this)
-            .setTitle("Выход!")
-            .setMessage("Вы действительно хотите выйти из приложения?")
-
-            .setPositiveButton("ДА") { _, _ ->
-                finish()
-            }
-            .setNegativeButton("НЕТ", null)
-            .setCancelable(true)
-            .create()
-            .show()
+    private fun logout() {
+        finish()
     }
 
     fun checkDelete() {

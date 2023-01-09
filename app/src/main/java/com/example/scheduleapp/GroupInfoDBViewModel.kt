@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.example.scheduleapp.data.Group
+import com.example.scheduleapp.data.GroupSC
 import com.example.scheduleapp.repository.ScheduleDBRepository
 import java.util.*
 
 class GroupInfoDBViewModel : ViewModel() {
     private val groupRepository = ScheduleDBRepository.get()
     private val groupIdLiveData = MutableLiveData<UUID>()
-    var groupLiveData: LiveData<Group?> =
+    var groupLiveData: LiveData<GroupSC?> =
         Transformations.switchMap(groupIdLiveData) { groupId ->
             groupRepository.getGroup(groupId)
         }
@@ -20,16 +20,20 @@ class GroupInfoDBViewModel : ViewModel() {
         groupIdLiveData.value = groupID
     }
 
-    fun newGroup(group: Group) {
+    fun newGroup(group: GroupSC) {
         groupRepository.addGroup(group)
     }
 
-    fun saveGroup(group: Group) {
+    fun saveGroup(group: GroupSC) {
         groupRepository.updateGroup(group)
     }
 
-    fun dropGroup(group: Group) {
+    fun dropGroup(group: GroupSC) {
         groupRepository.deleteGroup(group)
+    }
+
+    fun getGroupID(): UUID {
+        return groupRepository.groupID
     }
 
 }

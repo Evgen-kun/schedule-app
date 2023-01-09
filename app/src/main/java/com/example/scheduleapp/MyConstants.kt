@@ -8,4 +8,5 @@ object MyConstants {
     const val TAG = "com.example.scheduleapp.log_tag"
     const val SCHEDULE_ID_TAG = "com.example.scheduleapp.schedule_id"
     const val GROUP_ID_TAG = "com.example.scheduleapp.group_id"
+    const val EXTRA_GROUP_ID = "com.example.scheduleapp.extra_group_id"
 }

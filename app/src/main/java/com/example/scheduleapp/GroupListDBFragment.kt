@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.scheduleapp.data.Group
+import com.example.scheduleapp.data.GroupSC
 import java.util.*
 
 class GroupListDBFragment : Fragment() {
@@ -36,7 +36,7 @@ class GroupListDBFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val layoutView = inflater.inflate(R.layout.list_of_groups, container, false)
-        groupsListRecyclerView = layoutView.findViewById(R.id.rvList)
+        groupsListRecyclerView = layoutView.findViewById(R.id.rvGrList)
         groupsListRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         groupsListRecyclerView.adapter = adapter
         return layoutView
@@ -54,7 +54,7 @@ class GroupListDBFragment : Fragment() {
             })
     }
 
-    private inner class GroupListAdapter(private val items: List<Group>)
+    private inner class GroupListAdapter(private val items: List<GroupSC>)
         : RecyclerView.Adapter<GroupHolder>() {
         override fun onCreateViewHolder(
             parrent : ViewGroup,
@@ -73,11 +73,11 @@ class GroupListDBFragment : Fragment() {
 
     private inner class GroupHolder(view : View)
         : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener{
-        private lateinit var group: Group
-        private val nameTextView : TextView = itemView.findViewById(R.id.tvFIO)
-        private val clLayout: ConstraintLayout = itemView.findViewById(R.id.clCL)
+        private lateinit var group: GroupSC
+        private val nameTextView : TextView = itemView.findViewById(R.id.tvName)
+        private val clLayout: ConstraintLayout = itemView.findViewById(R.id.clGrCL)
 
-        fun bind(group: Group){
+        fun bind(group: GroupSC){
             //Log.d(MyConstants.TAG, "bind 1 $schedule")
             this.group = group
             nameTextView.text = group.name
@@ -94,13 +94,13 @@ class GroupListDBFragment : Fragment() {
         }
 
         override fun onLongClick(v: View?): Boolean {
-            //callbacks?.onGroupLongClick(schedule.building.toString())
+            callbacks?.onGroupLongClick(group.id)
             return true
         }
 
     }
 
-    private fun updateUI(groups: List<Group>) {
+    private fun updateUI(groups: List<GroupSC>) {
         if (groups==null) return
         adapter=GroupListAdapter(groups)
         groupsListRecyclerView.adapter = adapter
@@ -108,7 +108,7 @@ class GroupListDBFragment : Fragment() {
 
     interface Callbacks {
         fun onGroupSelected(groupId: UUID)
-        //fun onGroupLongClick(groupBuilding: String)
+        fun onGroupLongClick(groupId: UUID)
     }
 
     private var callbacks: Callbacks? = null

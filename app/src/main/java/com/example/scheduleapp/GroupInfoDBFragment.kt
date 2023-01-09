@@ -9,11 +9,11 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.scheduleapp.data.Group
+import com.example.scheduleapp.data.GroupSC
 import java.util.*
 
 class GroupInfoDBFragment : Fragment() {
-    private var group : Group? = null
+    private var group : GroupSC? = null
     private lateinit var groupInfoViewModel : GroupInfoDBViewModel
     private lateinit var groupListFragment : GroupListDBFragment
 
@@ -25,7 +25,7 @@ class GroupInfoDBFragment : Fragment() {
     companion object {
         fun newInstance(groupID: UUID): GroupInfoDBFragment {
             val args = Bundle().apply {
-                putString(MyConstants.SCHEDULE_ID_TAG, groupID.toString())
+                putString(MyConstants.GROUP_ID_TAG, groupID.toString())
             }
             return GroupInfoDBFragment().apply {
                 arguments = args
@@ -53,7 +53,7 @@ class GroupInfoDBFragment : Fragment() {
         btnGrSave=view.findViewById(R.id.btGrOk)
         btnGrSave.setOnClickListener {
             if (group == null) {
-                group = Group()
+                group = GroupSC()
                 updateGroup()
                 groupInfoViewModel.newGroup(group!!)
             } else {

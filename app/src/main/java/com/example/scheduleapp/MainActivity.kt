@@ -1,21 +1,21 @@
 package com.example.scheduleapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
+import com.example.scheduleapp.MyConstants.EXTRA_GROUP_ID
 import com.example.scheduleapp.MyConstants.GROUP_LIST_FRAGMENT_TAG
-import com.example.scheduleapp.MyConstants.SCHEDULE_INFO_FRAGMENT_TAG
-import com.example.scheduleapp.MyConstants.SCHEDULE_LIST_FRAGMENT_TAG
-import com.example.scheduleapp.data.Group
-import com.example.scheduleapp.data.Schedule
+import com.example.scheduleapp.data.GroupSC
 import com.example.scheduleapp.repository.ScheduleDBRepository
-import com.example.scheduleapp.repository.ScheduleRepository
 import java.util.*
 
 class MainActivity : AppCompatActivity(), GroupListDBFragment.Callbacks, GroupInfoDBFragment.Callbacks {
@@ -37,6 +37,14 @@ class MainActivity : AppCompatActivity(), GroupListDBFragment.Callbacks, GroupIn
         }
 
         onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    fun showSchedules(groupId: UUID) {
+        Log.d(MyConstants.TAG, "groupId IS $groupId")
+        ScheduleDBRepository.get().getGroup(groupId)
+        val intent = Intent(this, ScheduleActivity::class.java)
+        //intent.putExtra(EXTRA_GROUP_ID, groupId)
+        startActivity(intent)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -106,7 +114,7 @@ class MainActivity : AppCompatActivity(), GroupListDBFragment.Callbacks, GroupIn
         return when (item.itemId) {
             R.id.miGrAdd -> {
                 //showNewGroup()
-                showGroupDetailDB(Group().id)
+                showGroupDetailDB(GroupSC().id)
                 true
             }
             R.id.miGrDelete -> {
@@ -123,6 +131,10 @@ class MainActivity : AppCompatActivity(), GroupListDBFragment.Callbacks, GroupIn
 
     override fun onGroupSelected(groupId: UUID) {
         showGroupDetailDB(groupId)
+    }
+
+    override fun onGroupLongClick(groupId: UUID) {
+        showSchedules(groupId)
     }
 
     private fun showGroupDetailDB(groupId: UUID) {

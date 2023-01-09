@@ -1,9 +1,12 @@
 package com.example.scheduleapp.repository
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
-import com.example.scheduleapp.data.Group
+import com.example.scheduleapp.MyConstants
+import com.example.scheduleapp.data.GroupSC
 import com.example.scheduleapp.data.Schedule
 import com.example.scheduleapp.database.ScheduleDatabase
 import java.util.*
@@ -31,12 +34,20 @@ class ScheduleDBRepository private constructor(context: Context) {
         DATABASE_NAME
     ).build()
 
+    private val groupDao = database.groupDao()
     private val scheduleDao = database.scheduleDao()
+    var groupID: UUID = UUID.randomUUID()
 
-    fun getGroups(): LiveData<List<Group>> = scheduleDao.getGroups()
-    fun getGroup(id: UUID): LiveData<Group?> = scheduleDao.getGroup(id)
+    fun getGroups(): LiveData<List<GroupSC>> = groupDao.getGroups()
+    fun getGroup(id: UUID): LiveData<GroupSC?> {
+        val gr = groupDao.getGroup(id)
+        Log.d(MyConstants.TAG, "groupID (2) IS $id")
+        Log.d(MyConstants.TAG, "group IS ${gr.value}")
+        setCurrentGroupID(id)
+        return gr
+    }
 
-    fun getSchedules(): LiveData<List<Schedule>> = scheduleDao.getSchedules()
+    fun getSchedules(groupID: UUID = this.groupID): LiveData<List<Schedule>> = scheduleDao.getSchedules(groupID)
     fun getSortedSchedulesByDiscipline(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByDiscipline()
     fun getSortedSchedulesByTeacherName(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByTeacherName()
     fun getSortedSchedulesByPosition(): LiveData<List<Schedule>> = scheduleDao.getSortedSchedulesByPosition()
@@ -50,19 +61,19 @@ class ScheduleDBRepository private constructor(context: Context) {
     fun getScheduleElements(id: UUID): LiveData<Date> = scheduleDao.getScheduleElements(id)
 
     private val executor = Executors.newSingleThreadExecutor()
-    fun updateGroup(group: Group) {
+    fun updateGroup(group: GroupSC) {
         executor.execute {
-            scheduleDao.updateGroup(group)
+            groupDao.updateGroup(group)
         }
     }
-    fun addGroup(group: Group) {
+    fun addGroup(group: GroupSC) {
         executor.execute {
-            scheduleDao.addGroup(group)
+            groupDao.addGroup(group)
         }
     }
-    fun deleteGroup(group: Group) {
+    fun deleteGroup(group: GroupSC) {
         executor.execute {
-            scheduleDao.deleteGroup(group)
+            groupDao.deleteGroup(group)
         }
     }
 
@@ -80,6 +91,10 @@ class ScheduleDBRepository private constructor(context: Context) {
         executor.execute {
             scheduleDao.deleteSchedule(schedule)
         }
+    }
+
+    private fun setCurrentGroupID(groupID: UUID) {
+        this.groupID = groupID
     }
 
 }
