@@ -14,14 +14,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.scheduleapp.data.Schedule
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import java.util.*
 
 class ScheduleListDBFragment : Fragment() {
 
     private lateinit var schedulesListViewModel: ScheduleListDBViewModel
     private lateinit var schedulesListRecyclerView: RecyclerView
+    private lateinit var tabLayoutDays: TabLayout
 
     private var adapter: ScheduleListAdapter? = ScheduleListAdapter(emptyList())
+    private var selectedDay: String = ""
 
     companion object {
         private var INSTANCE : ScheduleListDBFragment? = null
@@ -42,17 +46,42 @@ class ScheduleListDBFragment : Fragment() {
         schedulesListRecyclerView = layoutView.findViewById(R.id.rvList)
         schedulesListRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         schedulesListRecyclerView.adapter = adapter
+
+        tabLayoutDays = layoutView.findViewById(R.id.tlDays)
+        tabLayoutDays.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                selectedDay = when (tab?.position) {
+                    0 -> "Понедельник"
+                    1 -> "Вторник"
+                    2 -> "Среда"
+                    3 -> "Четверг"
+                    4 -> "Пятница"
+                    5 -> "Суббота"
+                    6 -> "Воскресенье"
+                    else -> "Не определено"
+                }
+                updateSchedulesListViewModel()
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
         return layoutView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        updateSchedulesListViewModel()
+    }
+
+    private fun updateSchedulesListViewModel() {
         schedulesListViewModel = ViewModelProvider(this).get(ScheduleListDBViewModel::class.java)
         schedulesListViewModel.scheduleListLiveData.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer { schedules ->
                 schedules?.let {
-                    updateUI(schedules)
+                    updateUI(schedules.filter { it.day == selectedDay })
                 }
             })
     }

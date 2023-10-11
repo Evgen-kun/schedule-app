@@ -3,8 +3,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tlDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tiMon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_monday" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tiTue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_tuesday" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tiWed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_wednesday" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tiThu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_thursday" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tiFri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_friday" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tiSat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_saturday" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tiSun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_sunday" />
+    </com.google.android.material.tabs.TabLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:layout_marginTop="50dp" />
 </FrameLayout>

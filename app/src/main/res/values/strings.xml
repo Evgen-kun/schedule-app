@@ -32,4 +32,11 @@
     <string name="madd">+</string>
     <string name="mDell">Удалить</string>
     <string name="mChange">Изменить</string>
+    <string name="day_monday">ПН</string>
+    <string name="day_tuesday">ВТ</string>
+    <string name="day_wednesday">СР</string>
+    <string name="day_thursday">ЧТ</string>
+    <string name="day_friday">ПТ</string>
+    <string name="day_saturday">СБ</string>
+    <string name="day_sunday">ВС</string>
 </resources>
