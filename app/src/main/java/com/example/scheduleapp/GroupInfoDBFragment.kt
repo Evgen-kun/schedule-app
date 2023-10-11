@@ -18,6 +18,8 @@ class GroupInfoDBFragment : Fragment() {
     private lateinit var groupListFragment : GroupListDBFragment
 
     private lateinit var etName : EditText
+    private lateinit var etFaculty : EditText
+    private lateinit var etCourse : EditText
     private lateinit var btnGrSave : Button
     private lateinit var btnGrDelete : Button
     private lateinit var btnGrCancel : Button
@@ -50,6 +52,8 @@ class GroupInfoDBFragment : Fragment() {
 
 
         etName=view.findViewById(R.id.grName)
+        etFaculty=view.findViewById(R.id.grFaculty)
+        etCourse=view.findViewById(R.id.grCourse)
         btnGrSave=view.findViewById(R.id.btGrOk)
         btnGrSave.setOnClickListener {
             if (group == null) {
@@ -80,6 +84,8 @@ class GroupInfoDBFragment : Fragment() {
 
     private fun updateGroup() {
         group?.name = etName.text.toString()
+        group?.faculty = etFaculty.text.toString()
+        group?.course = etCourse.text.toString().toInt()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -96,6 +102,8 @@ class GroupInfoDBFragment : Fragment() {
 
     fun updateUI() {
         etName.setText(group?.name)
+        etFaculty.setText(group?.faculty)
+        etCourse.setText(group?.course.toString())
     }
 
     interface Callbacks {

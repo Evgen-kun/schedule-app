@@ -3,6 +3,7 @@ package com.example.scheduleapp.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
+import kotlin.time.Duration.Companion.minutes
 
 @Entity
 data class Schedule(
@@ -15,6 +16,8 @@ data class Schedule(
     var duration : Int = 0,
     var classroom : String = "",
     var building : Int = 0,
+    var coupleNumber : Int = 0,
+    var type : String = ""
     )
 {
     val day : String
@@ -38,7 +41,20 @@ data class Schedule(
         get() {
             val gregorianCalendar1 = GregorianCalendar()
             gregorianCalendar1.timeInMillis = date.time
-            val t = "${gregorianCalendar1.get(GregorianCalendar.HOUR_OF_DAY)}:${gregorianCalendar1.get(GregorianCalendar.MINUTE)}"
+//            val t = "${gregorianCalendar1.get(GregorianCalendar.HOUR_OF_DAY)}:${gregorianCalendar1.get(GregorianCalendar.MINUTE)}"
+//            return t
+            val t = when (coupleNumber) {
+                1 -> "8:00 - 9:20"
+                2 -> "9:30 - 10:50"
+                3 -> "11:10 - 12:30"
+                4 -> "12:40 - 14:00"
+                5 -> "14:10 - 15:30"
+                6 -> "15:40 - 17:00"
+                7 -> "17:10 - 18:30"
+                8 -> "18:40 - 20:00"
+                9 -> "20:10 : 21:30"
+                else -> "Не определено"
+            }
             return t
         }
 
@@ -56,6 +72,8 @@ data class Schedule(
         if (duration != other.duration) return false
         if (classroom != other.classroom) return false
         if (building != other.building) return false
+        if (coupleNumber != other.coupleNumber) return false
+        if (type != other.type) return false
 
         return true
     }
@@ -69,6 +87,8 @@ data class Schedule(
         result = 31 * result + duration.hashCode()
         result = 31 * result + classroom.hashCode()
         result = 31 * result + building.hashCode()
+        result = 31 * result + coupleNumber.hashCode()
+        result = 31 * result + type.hashCode()
         return result
     }
 }

@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -30,6 +32,7 @@ class ScheduleInfoDBFragment : Fragment() {
     private lateinit var tvTime : TextView
     private lateinit var tvDuration : TextView
     private lateinit var tvClassroom : TextView
+    private lateinit var tvCoupleNumber : TextView
 
     private lateinit var etDiscipline : EditText
     private lateinit var etTeacherName : EditText
@@ -39,6 +42,12 @@ class ScheduleInfoDBFragment : Fragment() {
     private lateinit var etTime : EditText
     private lateinit var etDuration : EditText
     private lateinit var etClassroom : EditText
+    private lateinit var etCoupleNumber : EditText
+
+    private lateinit var rgType : RadioGroup
+    private lateinit var rbLecture : RadioButton
+    private lateinit var rbPractice : RadioButton
+
     private lateinit var btnSave : Button
     private lateinit var btnDelete : Button
     private lateinit var btnCancel : Button
@@ -113,6 +122,12 @@ class ScheduleInfoDBFragment : Fragment() {
             //callbacks?.showDBSchedules()
             true
         }
+        tvCoupleNumber = view.findViewById(R.id.l_coupleNumber)
+        tvCoupleNumber.setOnLongClickListener {
+            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByCoupleNumber().value!!)
+            //callbacks?.showDBSchedules()
+            true
+        }
 
         etDiscipline=view.findViewById(R.id.discipline)
         etTeacherName=view.findViewById(R.id.teacherName)
@@ -122,6 +137,10 @@ class ScheduleInfoDBFragment : Fragment() {
         etClassroom=view.findViewById(R.id.classroom)
         etTime=view.findViewById(R.id.time)
         dpDate=view.findViewById(R.id.datePicker)
+        etCoupleNumber=view.findViewById(R.id.coupleNumber)
+        rgType=view.findViewById(R.id.rgType)
+        rbLecture=view.findViewById(R.id.rbLecture)
+        rbPractice=view.findViewById(R.id.rbPractice)
         btnSave=view.findViewById(R.id.btOk)
         btnSave.setOnClickListener {
             if (schedule == null) {
@@ -160,6 +179,8 @@ class ScheduleInfoDBFragment : Fragment() {
         schedule?.date = Date(dpDate.year - 1900, dpDate.month, dpDate.dayOfMonth, etTime.text.toString().split(":")[0].toInt(), etTime.text.toString().split(":")[1].toInt())
         schedule?.duration = etDuration.text.toString().toInt()
         schedule?.classroom = etClassroom.text.toString()
+        schedule?.coupleNumber = etCoupleNumber.text.toString().toInt()
+        schedule?.type = if (rbLecture.isChecked) rbLecture.text.toString() else rbPractice.text.toString()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -185,6 +206,8 @@ class ScheduleInfoDBFragment : Fragment() {
         etTime.setText("${date.get(Calendar.HOUR)}:${date.get(Calendar.MINUTE)}")
         etDuration.setText(schedule?.duration.toString())
         etClassroom.setText(schedule?.classroom)
+        etCoupleNumber.setText(schedule?.coupleNumber.toString())
+        rgType.check(if(schedule?.type == "Лекция") R.id.rbLecture else R.id.rbPractice)
     }
 
     interface Callbacks {

@@ -174,6 +174,28 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <RadioGroup
+                android:id="@+id/rgType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checkedButton="@id/rbLecture"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbLecture"
+                    android:layout_width="181dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rbLecture"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/rbPractice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rbPractice"
+                    android:textSize="20sp" />
+            </RadioGroup>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ciTime"
                 android:layout_width="409dp"
@@ -208,6 +230,43 @@
                     app:layout_constraintStart_toEndOf="@+id/l_time"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ciCoupleNumber"
+                android:layout_width="409dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ciTime">
+
+                <TextView
+                    android:id="@+id/l_coupleNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/coupleNumber"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.045"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/coupleNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/input_coupleNumber"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/l_coupleNumber"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,10 +1,12 @@
 package com.example.scheduleapp
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -78,6 +80,11 @@ class ScheduleListDBFragment : Fragment() {
         private val fioTextView : TextView = itemView.findViewById(R.id.tvFIO)
         private val dayTextView : TextView = itemView.findViewById(R.id.tvDayOfMonth)
         private val timeTextView : TextView = itemView.findViewById(R.id.tvTime)
+        private val classroomTextView : TextView = itemView.findViewById(R.id.tvElClassroom)
+        private val nameTextView : TextView = itemView.findViewById(R.id.tvElName)
+        private val coupleNumberTextView : TextView = itemView.findViewById(R.id.tvCoupleNumber)
+        private val typeTextView : TextView = itemView.findViewById(R.id.tvType)
+        private val typeFrameLayout : FrameLayout = itemView.findViewById(R.id.flType)
         private val clLayout: ConstraintLayout = itemView.findViewById(R.id.clCL)
 
         fun bind(schedule: Schedule){
@@ -86,6 +93,21 @@ class ScheduleListDBFragment : Fragment() {
             fioTextView.text = schedule.discipline
             dayTextView.text = schedule.day
             timeTextView.text = schedule.time
+            classroomTextView.text = schedule.classroom
+            nameTextView.text = schedule.teacherName
+            coupleNumberTextView.text = schedule.coupleNumber.toString()
+            val drawable = resources.getDrawable(R.drawable.circle)
+            drawable.setColorFilter(
+                if (schedule.type == "Лекция") resources.getColor(R.color.lecture_color)
+                else resources.getColor(R.color.practice_color),
+                PorterDuff.Mode.SRC_IN
+            )
+            coupleNumberTextView.background = drawable
+            typeTextView.text = schedule.type
+            typeFrameLayout.setBackgroundColor(
+                if (schedule.type == "Лекция") resources.getColor(R.color.lecture_color)
+                else resources.getColor(R.color.practice_color)
+            )
             //Log.d(MyConstants.TAG, "bind 2 $schedule")
         }
 
@@ -95,11 +117,11 @@ class ScheduleListDBFragment : Fragment() {
         }
 
         override fun onClick(v: View?) {
-            callbacks?.onScheduleSelected(schedule.id)
+            callbacks?.onScheduleSelected(schedule.building.toString())
         }
 
         override fun onLongClick(v: View?): Boolean {
-            callbacks?.onScheduleLongClick(schedule.building.toString())
+            callbacks?.onScheduleLongClick(schedule.id)
             return true
         }
 
@@ -112,8 +134,8 @@ class ScheduleListDBFragment : Fragment() {
     }
 
     interface Callbacks {
-        fun onScheduleSelected(scheduleId: UUID)
-        fun onScheduleLongClick(scheduleBuilding: String)
+        fun onScheduleLongClick(scheduleId: UUID)
+        fun onScheduleSelected(scheduleBuilding: String)
     }
 
     private var callbacks: Callbacks? = null

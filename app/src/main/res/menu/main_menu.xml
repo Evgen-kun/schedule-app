@@ -4,6 +4,7 @@
 
     <item
         android:id="@+id/miAdd"
+        android:icon="@android:drawable/ic_input_add"
         android:title="@string/madd"
         app:showAsAction="ifRoom" />
     <item

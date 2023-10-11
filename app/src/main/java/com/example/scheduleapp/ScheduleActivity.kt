@@ -136,11 +136,11 @@ class ScheduleActivity : AppCompatActivity(), ScheduleListDBFragment.Callbacks, 
             .commit()
     }*/
 
-    override fun onScheduleSelected(scheduleId: UUID) {
+    override fun onScheduleLongClick(scheduleId: UUID) {
         showScheduleDetailDB(scheduleId)
     }
 
-    override fun onScheduleLongClick(scheduleBuilding: String) {
+    override fun onScheduleSelected(scheduleBuilding: String) {
         showToast(scheduleBuilding)
     }
 

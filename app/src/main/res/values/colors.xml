@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="element">#CCCCCCCC</color>
+    <color name="lecture_color">#CBCBFD</color>
+    <color name="practice_color">#FDCFB5</color>
 </resources>

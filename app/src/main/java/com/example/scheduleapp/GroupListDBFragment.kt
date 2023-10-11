@@ -75,12 +75,14 @@ class GroupListDBFragment : Fragment() {
         : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener{
         private lateinit var group: GroupSC
         private val nameTextView : TextView = itemView.findViewById(R.id.tvName)
+        private val groupInfoTextView : TextView = itemView.findViewById(R.id.tvGroupInfo)
         private val clLayout: ConstraintLayout = itemView.findViewById(R.id.clGrCL)
 
         fun bind(group: GroupSC){
             //Log.d(MyConstants.TAG, "bind 1 $schedule")
             this.group = group
             nameTextView.text = group.name
+            groupInfoTextView.text = "${group.faculty}, ${group.course} курс"
             //Log.d(MyConstants.TAG, "bind 2 $schedule")
         }
 

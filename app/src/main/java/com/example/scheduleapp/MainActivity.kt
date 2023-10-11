@@ -130,11 +130,11 @@ class MainActivity : AppCompatActivity(), GroupListDBFragment.Callbacks, GroupIn
     }
 
     override fun onGroupSelected(groupId: UUID) {
-        showGroupDetailDB(groupId)
+        showSchedules(groupId)
     }
 
     override fun onGroupLongClick(groupId: UUID) {
-        showSchedules(groupId)
+        showGroupDetailDB(groupId)
     }
 
     private fun showGroupDetailDB(groupId: UUID) {
