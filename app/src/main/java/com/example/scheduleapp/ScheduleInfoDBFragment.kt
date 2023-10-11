@@ -76,58 +76,6 @@ class ScheduleInfoDBFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.schedule_info, container, false)
-        //scheduleListFragment = ScheduleListDBFragment.getInstance()
-        tvDiscipline = view.findViewById(R.id.l_discipline)
-        tvDiscipline.setOnLongClickListener {
-
-            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByDiscipline().value!!)
-            //callbacks?.showDBSchedules()
-            true
-        }
-        tvTeacherName = view.findViewById(R.id.l_teacherName)
-        tvTeacherName.setOnLongClickListener {
-            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByTeacherName().value!!)
-            //callbacks?.showDBSchedules()
-            true
-        }
-        tvPosition = view.findViewById(R.id.l_position)
-        tvPosition.setOnLongClickListener {
-            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByPosition().value!!)
-            //callbacks?.showDBSchedules()
-            true
-        }
-        tvBuilding = view.findViewById(R.id.l_building)
-        tvBuilding.setOnLongClickListener {
-            //Log.d(MyConstants.TAG, scheduleInfoViewModel.sortSchedulesByBuilding().value.toString())
-            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByBuilding().value!!)
-            //callbacks?.showDBSchedules()
-            true
-        }
-        tvTime = view.findViewById(R.id.l_time)
-        tvTime.setOnLongClickListener {
-            //Log.d(MyConstants.TAG, scheduleInfoViewModel.sortSchedulesByDate().value.toString())
-            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByDate().value!!)
-            //callbacks?.showDBSchedules()
-            true
-        }
-        tvDuration = view.findViewById(R.id.l_duration)
-        tvDuration.setOnLongClickListener {
-            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByDuration().value!!)
-            //callbacks?.showDBSchedules()
-            true
-        }
-        tvClassroom = view.findViewById(R.id.l_classroom)
-        tvClassroom.setOnLongClickListener {
-            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByClassroom().value!!)
-            //callbacks?.showDBSchedules()
-            true
-        }
-        tvCoupleNumber = view.findViewById(R.id.l_coupleNumber)
-        tvCoupleNumber.setOnLongClickListener {
-            //scheduleListFragment.updateUI(scheduleInfoViewModel.sortSchedulesByCoupleNumber().value!!)
-            //callbacks?.showDBSchedules()
-            true
-        }
 
         etDiscipline=view.findViewById(R.id.discipline)
         etTeacherName=view.findViewById(R.id.teacherName)

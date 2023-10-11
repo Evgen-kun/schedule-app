@@ -3,113 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="30dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ciGrName"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiGrName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/l_grName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/grName"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/grName"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:autofillHints=""
-            android:ems="10"
+            android:layout_marginTop="5dp"
             android:hint="@string/input_grName"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/l_grName"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TouchTargetSizeCheck" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ciGrFaculty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/ciGrName"
-        tools:layout_editor_absoluteX="0dp">
-
-        <TextView
-            android:id="@+id/l_grFaculty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/grFaculty"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/grFaculty"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/grFaculty"
-            android:layout_width="261dp"
-            android:layout_height="49dp"
             android:ems="10"
-            android:hint="@string/input_grFaculty"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:inputType="text"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ciGrCourse"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiGrFaculty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/ciGrFaculty"
-        tools:layout_editor_absoluteX="0dp">
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:boxBackgroundColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiGrName">
 
-        <TextView
-            android:id="@+id/l_grCourse"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/grFaculty"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/grСourse"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/grCourse"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="5dp"
+            android:hint="@string/input_grFaculty"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiGrCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:boxBackgroundColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiGrFaculty">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/grCourse"
-            android:layout_width="309dp"
-            android:layout_height="47dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="@string/input_grСourse"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:inputType="text"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/ciGrCourse"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiGrCourse">
 
         <Space
             android:layout_width="wrap_content"
@@ -119,9 +89,10 @@
         <Button
             android:id="@+id/btGrOk"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="@string/save"
-            app:backgroundTint="?attr/colorSecondaryVariant" />
+            app:backgroundTint="?attr/colorSecondaryVariant"
+            app:cornerRadius="30dp" />
 
         <Space
             android:layout_width="wrap_content"
@@ -131,10 +102,10 @@
         <Button
             android:id="@+id/btnGrDelete"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="60dp"
             android:text="@string/mDell"
-            app:backgroundTint="?attr/colorError" />
+            app:backgroundTint="?attr/colorError"
+            app:cornerRadius="30dp" />
 
         <Space
             android:layout_width="wrap_content"
@@ -143,9 +114,10 @@
 
         <Button
             android:id="@+id/btnGrCancel"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel" />
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="@string/cancel"
+            app:cornerRadius="30dp" />
 
         <Space
             android:layout_width="wrap_content"
@@ -153,4 +125,5 @@
             android:layout_weight="1" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
